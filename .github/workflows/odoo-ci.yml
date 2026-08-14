@@ -1,0 +1,30 @@
+name: Odoo CI (Code Quality)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8
+        
+    - name: Lint with flake8
+      run: |
+        # Зупиняє білд, якщо є серйозні синтаксичні помилки
+        flake8 company_hr_military --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Перевірка стилю коду (PEP8), не зупиняє білд
+        flake8 company_hr_military --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics

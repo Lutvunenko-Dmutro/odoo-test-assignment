@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_company_hr_military_tck,company_hr_military.tck,model_company_hr_military_tck,base.group_user,1,1,1,1

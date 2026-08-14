@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+odoo-venv/
+.env
+
+# Odoo
+odoo/
+filestore/
+sessions/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
