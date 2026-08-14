@@ -22,6 +22,25 @@
 | **Інтеграція в UI** | Нові поля відображаються в окремому блоці **"Військовий облік"** на вкладці **"Приватна інформація"** картки співробітника |
 | **Пункт меню** | Додано "ТЦК та СП" у меню Співробітники → Налаштування |
 
+### Схема бази даних (ER Diagram)
+
+```mermaid
+erDiagram
+    hr_employee {
+        boolean is_reserved "Бронювання"
+        boolean is_mobilized "Мобілізований"
+        char edrpvr_number "№ в ЄДРПВР"
+        int tck_id FK "Посилання на ТЦК"
+    }
+    company_hr_military_tck {
+        int id PK
+        char name "Назва ТЦК"
+        char code "Код"
+        char phone "Телефон"
+    }
+    company_hr_military_tck ||--o{ hr_employee : "належить"
+```
+
 ---
 
 ## 🗂️ Структура проекту

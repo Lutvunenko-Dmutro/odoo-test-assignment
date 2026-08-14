@@ -22,6 +22,25 @@ A custom Odoo 19 Community Edition module that extends the standard HR module wi
 | **UI Integration** | All new fields are displayed in a dedicated **"Військовий облік"** group inside the employee form's **"Private Information"** tab |
 | **Menu Item** | A new "ТЦК та СП" item is added under Employees → Configuration |
 
+### Database Schema (ER Diagram)
+
+```mermaid
+erDiagram
+    hr_employee {
+        boolean is_reserved
+        boolean is_mobilized
+        char edrpvr_number
+        int tck_id FK
+    }
+    company_hr_military_tck {
+        int id PK
+        char name
+        char code
+        char phone
+    }
+    company_hr_military_tck ||--o{ hr_employee : "has many"
+```
+
 ---
 
 ## 🗂️ Project Structure
