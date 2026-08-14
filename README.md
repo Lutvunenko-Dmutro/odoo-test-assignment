@@ -1,59 +1,64 @@
-# company_hr_military — Odoo 19 Module
+# company_hr_military — Модуль Odoo 19
 
-> **Test assignment** for the Odoo Developer (Python) position at **ENAMINE**.
-> Author: **Dmytro Lutvunenko**
+> **Тестове завдання** на позицію Odoo Developer (Python) у компанії **ENAMINE**.
+> Автор: **Dmytro Lutvunenko**
 
 ---
 
-## 📋 Overview
+🇺🇦 Українська &nbsp;|&nbsp; [🇬🇧 English](README.en.md)
 
-This repository contains a custom Odoo 19 Community Edition module `company_hr_military` that extends the standard HR module with military record-keeping functionality, as required by Ukrainian legislation.
+---
 
-### What the module does
+## 📋 Опис
 
-| Feature | Description |
+Кастомний модуль для Odoo 19 Community Edition, що розширює стандартний HR-модуль функціоналом військового обліку співробітників відповідно до вимог законодавства України.
+
+### Що робить модуль
+
+| Функціонал | Опис |
 |---|---|
-| **TCK & SP Directory** | A new reference model (`company_hr_military.tck`) for storing military recruitment centers (ТЦК та СП) with name, code, and phone fields |
-| **Employee Extension** | Extends `hr.employee` with 4 new fields: Reservation status, Mobilization status, TCK link (Many2one), and EDRPVR number |
-| **UI Integration** | All new fields are displayed in a dedicated **"Військовий облік"** group inside the employee form's **"Private Information"** tab |
-| **Menu Item** | A new "ТЦК та СП" item is added under Employees → Configuration |
+| **Довідник ТЦК та СП** | Нова модель (`company_hr_military.tck`) для зберігання даних про територіальні центри комплектування: назва, код, телефон |
+| **Розширення картки співробітника** | Додає 4 нові поля до `hr.employee`: Бронювання, Мобілізований, ТЦК та СП (Many2one), № в ЄДРПВР |
+| **Інтеграція в UI** | Нові поля відображаються в окремому блоці **"Військовий облік"** на вкладці **"Приватна інформація"** картки співробітника |
+| **Пункт меню** | Додано "ТЦК та СП" у меню Співробітники → Налаштування |
 
 ---
 
-## 🗂️ Project Structure
+## 🗂️ Структура проекту
 
 ```
 odoo-test-assignment/
 ├── .github/
 │   └── workflows/
-│       └── odoo-ci.yml         # GitHub Actions: flake8 linter (CI/CD)
+│       └── odoo-ci.yml             # GitHub Actions: flake8 лінтер (CI/CD)
 ├── company_hr_military/
 │   ├── models/
 │   │   ├── __init__.py
-│   │   ├── tck.py              # TCK & SP reference model
-│   │   └── hr_employee.py      # hr.employee extension (_inherit)
+│   │   ├── tck.py                  # Модель довідника ТЦК та СП
+│   │   └── hr_employee.py          # Розширення hr.employee (_inherit)
 │   ├── security/
-│   │   └── ir.model.access.csv # Access rights for all users
+│   │   └── ir.model.access.csv     # Права доступу для всіх користувачів
 │   ├── tests/
 │   │   ├── __init__.py
-│   │   └── test_hr_military.py # Unit tests (TransactionCase)
+│   │   └── test_hr_military.py     # Unit-тести (TransactionCase)
 │   ├── views/
-│   │   ├── tck_views.xml       # List & Form views + menu for TCK
-│   │   └── hr_employee_views.xml # XPath injection into employee form
+│   │   ├── tck_views.xml           # List & Form вигляди + меню для ТЦК
+│   │   └── hr_employee_views.xml   # XPath-ін'єкція у форму співробітника
 │   ├── __init__.py
 │   └── __manifest__.py
 ├── .gitignore
-├── odoo.conf                   # Example configuration file
-└── README.md
+├── odoo.conf                       # Приклад конфігураційного файлу
+├── README.md                       # 🇺🇦 Ця документація
+└── README.en.md                    # 🇬🇧 English documentation
 ```
 
 ---
 
-## ⚙️ Environment Setup
+## ⚙️ Налаштування оточення
 
-**Stack:** Ubuntu 24.04 (WSL2 on Windows 11) · Python 3.12 · PostgreSQL 18 (native, no Docker) · Odoo 19.0 CE (from source)
+**Стек:** Ubuntu 24.04 (WSL2 на Windows 11) · Python 3.12 · PostgreSQL 18 (нативно, без Docker) · Odoo 19.0 CE (з вихідного коду)
 
-### Step 1 — System dependencies
+### Крок 1 — Системні залежності
 
 ```bash
 sudo apt update && sudo apt upgrade -y
@@ -63,40 +68,39 @@ sudo apt install -y python3 python3-pip python3-venv python3-dev \
     libwebp-dev libharfbuzz-dev libfribidi-dev libxcb1-dev git
 ```
 
-### Step 2 — PostgreSQL (native install)
+### Крок 2 — PostgreSQL (нативне встановлення, без Docker)
 
 ```bash
 sudo apt install -y postgresql postgresql-client
 sudo service postgresql start
 
-# Create Odoo DB user
+# Створення користувача БД для Odoo
 sudo su - postgres -c "createuser -s odoo"
 sudo su - postgres -c "psql -c \"ALTER USER odoo WITH PASSWORD 'odoo';\""
 ```
 
-> ⚠️ **WSL2 note:** Use `sudo service postgresql start` instead of `systemctl` — systemd is not enabled by default in WSL2.
+> ⚠️ **WSL2:** Використовуйте `sudo service postgresql start` замість `systemctl` — systemd вимкнений у WSL2 за замовчуванням.
 
-### Step 3 — wkhtmltopdf (for PDF reports)
+### Крок 3 — wkhtmltopdf (для генерації PDF-звітів)
 
 ```bash
 wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 sudo apt install -y ./wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 ```
 
-### Step 4 — Clone Odoo 19 source
+### Крок 4 — Клонування вихідного коду Odoo 19
 
 ```bash
-# Clone to Linux home directory (NOT to /mnt/d/ — git chmod fails on NTFS)
+# Клонуємо в домашню директорію Linux (НЕ в /mnt/d/ — git chmod не працює на NTFS)
 mkdir ~/odoo && cd ~/odoo
 git clone --branch 19.0 --single-branch --depth 1 https://github.com/odoo/odoo.git .
 ```
 
-> ⚠️ **Important:** Always clone Odoo to the native Linux filesystem (e.g., `~/`), not to a Windows-mounted drive (`/mnt/d/`). Git's `core.filemode` chmod operations fail on NTFS volumes.
+> ⚠️ **Важливо:** Завжди клонуйте Odoo у нативну Linux-файлову систему (`~/`), а не на змонтований Windows-диск (`/mnt/d/`). Операція `git chmod` на NTFS завершується помилкою.
 
-### Step 5 — Python virtual environment
+### Крок 5 — Віртуальне Python-середовище
 
 ```bash
-# Create venv on the Linux filesystem
 python3 -m venv ~/odoo-venv
 source ~/odoo-venv/bin/activate
 
@@ -104,13 +108,13 @@ pip install setuptools wheel
 pip install -r ~/odoo/requirements.txt
 ```
 
-### Step 6 — Clone this repository & configure
+### Крок 6 — Клонування цього репозиторію та конфігурація
 
 ```bash
 git clone https://github.com/Lutvunenko-Dmutro/odoo-test-assignment.git ~/odoo-test-assignment
 ```
 
-Edit `odoo.conf` and set your `addons_path` to point to both Odoo core addons and this module's parent directory:
+Відредагуйте `odoo.conf`, вказавши правильний `addons_path`:
 
 ```ini
 [options]
@@ -123,9 +127,9 @@ addons_path = ~/odoo/addons,~/odoo-test-assignment
 http_port = 8069
 ```
 
-> ⚠️ **WSL2 note:** Set `db_host = localhost` (not `False`). Without it, PostgreSQL uses peer authentication which fails for non-`postgres` system users.
+> ⚠️ **WSL2:** Обов'язково встановіть `db_host = localhost`. Без цього PostgreSQL використовує peer-автентифікацію, яка не працює для не-`postgres` системних користувачів.
 
-### Step 7 — Run the server
+### Крок 7 — Запуск сервера
 
 ```bash
 source ~/odoo-venv/bin/activate
@@ -133,20 +137,20 @@ cd ~/odoo
 ./odoo-bin -c ~/odoo-test-assignment/odoo.conf
 ```
 
-Open `http://localhost:8069` in your browser.
+Відкрийте `http://localhost:8069` у браузері.
 
 ---
 
-## 🚀 Module Installation
+## 🚀 Встановлення модуля
 
-1. Create a new database at `http://localhost:8069` (enable **Demo data** for sample employees).
-2. Go to **Settings** → scroll to bottom → click **Activate the developer mode**.
-3. Go to **Apps** → click **Update Apps List** → confirm.
-4. Search for `Military` → find **Company HR Military** → click **Activate**.
+1. Створіть нову базу даних на `http://localhost:8069` (увімкніть **Demo data** для тестових даних).
+2. Перейдіть у **Налаштування** → прокрутіть вниз → натисніть **Активувати режим розробника**.
+3. Перейдіть у **Додатки** → натисніть **Оновити список додатків** → підтвердіть.
+4. Знайдіть `Military` → оберіть **Company HR Military** → натисніть **Активувати**.
 
 ---
 
-## 🧪 Running Tests
+## 🧪 Запуск тестів
 
 ```bash
 source ~/odoo-venv/bin/activate
@@ -158,40 +162,40 @@ cd ~/odoo
     -d test_db
 ```
 
-The test suite covers:
-- ✅ TCK record creation and field validation
-- ✅ Employee military fields persistence
-- ✅ Many2one relation between employee and TCK
+Тестовий набір перевіряє:
+- ✅ Створення запису ТЦК та збереження полів
+- ✅ Збереження військових полів у картці співробітника
+- ✅ Зв'язок Many2one між співробітником та ТЦК
 
 ---
 
 ## 🔄 CI/CD
 
-Every push to `main` triggers a **GitHub Actions** workflow (`.github/workflows/odoo-ci.yml`) that:
-1. Spins up Ubuntu on GitHub's cloud
-2. Installs Python 3.10 + `flake8`
-3. Runs two linting passes on `company_hr_military/`:
-   - **Pass 1:** Hard fail on syntax errors (`E9`, `F63`, `F7`, `F82`)
-   - **Pass 2:** PEP8 style check (warnings only, max line length 120)
+Кожен push у гілку `main` автоматично запускає **GitHub Actions** (`.github/workflows/odoo-ci.yml`):
+1. Розгортає Ubuntu в хмарі GitHub.
+2. Встановлює Python 3.10 + `flake8`.
+3. Запускає два проходи лінтера на `company_hr_military/`:
+   - **Прохід 1:** Жорстка зупинка при синтаксичних помилках (`E9`, `F63`, `F7`, `F82`)
+   - **Прохід 2:** Перевірка стилю PEP8 (попередження, макс. довжина рядка 120)
 
 ---
 
-## 🐛 Challenges & Solutions
+## 🐛 Виклики та вирішення
 
-| Challenge | Solution |
+| Проблема | Рішення |
 |---|---|
-| `git chmod` fails on `/mnt/d/` (NTFS) | Cloned Odoo to native Linux `~/` filesystem |
-| `python3 -m venv` fails on `/mnt/d/` | Created venv at `~/odoo-venv` on Linux filesystem |
-| PostgreSQL peer auth error | Set `db_host = localhost` in `odoo.conf` to force TCP connection |
-| `odoo.conf` warns `db_host reads 'False'` | Removed `False` placeholder, set real `localhost` value |
-| Odoo 19 rejects `<tree>` tag in XML views | Replaced with `<list>` — renamed in Odoo 19 (breaking change from 18) |
+| `git chmod` падає на `/mnt/d/` (NTFS) | Клонував Odoo у нативну Linux-директорію `~/` |
+| `python3 -m venv` падає на `/mnt/d/` | Створив venv у `~/odoo-venv` на Linux-файловій системі |
+| Помилка peer-автентифікації PostgreSQL | Встановив `db_host = localhost` у `odoo.conf` для TCP-з'єднання |
+| `odoo.conf` попереджає `db_host reads 'False'` | Замінив плейсхолдер `False` на реальне значення `localhost` |
+| Odoo 19 не приймає тег `<tree>` у XML-в'юхах | Замінив на `<list>` — перейменовано в Odoo 19 (breaking change з версії 18) |
 
 ---
 
-## 📦 Tech Stack
+## 📦 Технічний стек
 
-- **Odoo 19.0 CE** (Community Edition, from source)
+- **Odoo 19.0 CE** (Community Edition, з вихідного коду)
 - **Python 3.12**
-- **PostgreSQL 18** (native, no Docker)
-- **Ubuntu 24.04** via WSL2
-- **GitHub Actions** for CI/CD (flake8 linter)
+- **PostgreSQL 18** (нативно, без Docker)
+- **Ubuntu 24.04** через WSL2
+- **GitHub Actions** для CI/CD (flake8 лінтер)
