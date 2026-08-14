@@ -49,6 +49,17 @@ erDiagram
 
 ---
 
+## 📸 Functionality Demonstration
+
+### 1. TCK Directory
+![TCK List](docs/screenshots/tck_list.png)
+![TCK Form](docs/screenshots/tck_form.png)
+
+### 2. Employee Card (Military Registration)
+![Employee Card Integration](docs/screenshots/employee_military.png)
+
+---
+
 ## 🗂️ Project Structure
 
 ```
