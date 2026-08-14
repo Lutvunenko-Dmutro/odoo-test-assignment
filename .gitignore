@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyo
 venv/
 odoo-venv/
 .env
@@ -11,6 +12,11 @@ odoo/
 filestore/
 sessions/
 *.log
+*.pid
+
+# System packages
+*.deb
+*.rpm
 
 # OS
 .DS_Store

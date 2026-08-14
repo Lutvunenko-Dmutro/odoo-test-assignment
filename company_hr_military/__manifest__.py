@@ -11,7 +11,7 @@
         - Мобілізація співробітника
         - Номер в ЄДРПВР
     """,
-    'author': 'Candidate',
+    'author': 'Dmytro Lutvunenko',
     'depends': ['hr'],
     'data': [
         'security/ir.model.access.csv',
