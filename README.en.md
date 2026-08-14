@@ -3,6 +3,12 @@
 > **Test assignment** for the Odoo Developer (Python) position at **ENAMINE**.
 > Author: **Dmytro Lutvunenko**
 
+[![CI Pipeline](https://github.com/Lutvunenko-Dmutro/odoo-test-assignment/actions/workflows/odoo-ci.yml/badge.svg)](https://github.com/Lutvunenko-Dmutro/odoo-test-assignment/actions)
+[![Odoo 19.0](https://img.shields.io/badge/Odoo-19.0-714B67?logo=odoo&logoColor=white)](https://www.odoo.com/)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Ubuntu WSL2](https://img.shields.io/badge/Ubuntu-WSL2-E95420?logo=ubuntu&logoColor=white)](https://ubuntu.com/)
+
 ---
 
 [🇺🇦 Українська](README.md) &nbsp;|&nbsp; 🇬🇧 English
