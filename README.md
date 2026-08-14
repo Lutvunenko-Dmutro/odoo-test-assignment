@@ -56,7 +56,7 @@ erDiagram
 ![Форма створення ТЦК](docs/screenshots/tck_form.png)
 
 ### 2. Картка співробітника (Військовий облік)
-![Інтеграція в картку співробітника](docs/screenshots/employee_military.png)
+![Інтеграція в картку співробітника](docs/screenshots/employee_military_filled.png)
 
 ---
 

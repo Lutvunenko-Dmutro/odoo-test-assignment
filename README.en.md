@@ -56,7 +56,7 @@ erDiagram
 ![TCK Form](docs/screenshots/tck_form.png)
 
 ### 2. Employee Card (Military Registration)
-![Employee Card Integration](docs/screenshots/employee_military.png)
+![Employee Card Integration](docs/screenshots/employee_military_filled.png)
 
 ---
 
